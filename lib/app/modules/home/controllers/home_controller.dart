@@ -1,23 +1,18 @@
+import 'package:flash_chat1/app/modules/home/service/home_service.dart';
+import 'package:flash_chat1/app/routes/app_pages.dart';
+import 'package:flash_chat1/utils/app_shows.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future<void> logout() async {
+    AppShows.showIndicator();
+    await HomeService.logout();
+    await Get.offAllNamed(Routes.FLASH_CHAT);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> delete() async {
+    AppShows.showIndicator();
+    await HomeService.delete();
+    await Get.offAllNamed(Routes.FLASH_CHAT);
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

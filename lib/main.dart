@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat1/services/service_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,23 +18,26 @@ void main() async {
   if (shouldUseFirebaseEmulator) {
     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   }
-
+  final isAuth = await userManager.init();
   runApp(
-    const MyApp(),
+    MyApp(
+      isAuth: isAuth,
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
+    required this.isAuth,
   });
-
+  final bool isAuth;
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Application",
-      initialRoute: AppPages.INITIAL,
+      initialRoute: isAuth ? AppPages.INITIALHOME : AppPages.INITIALFLASH_CHAT,
       getPages: AppPages.routes,
     );
   }

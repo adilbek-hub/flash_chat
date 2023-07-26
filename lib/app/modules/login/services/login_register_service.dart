@@ -16,7 +16,7 @@ class LoginService {
 
   static Future<UserCredential?> login(String email, String password) async {
     try {
-      final user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
