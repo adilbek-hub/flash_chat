@@ -1,9 +1,11 @@
 import 'package:flash_chat1/app/modules/home/service/home_service.dart';
 import 'package:flash_chat1/app/routes/app_pages.dart';
 import 'package:flash_chat1/utils/app_shows.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final smsController = TextEditingController();
   Future<void> logout() async {
     AppShows.showIndicator();
     await HomeService.logout();
@@ -14,5 +16,14 @@ class HomeController extends GetxController {
     AppShows.showIndicator();
     await HomeService.delete();
     await Get.offAllNamed(Routes.FLASH_CHAT);
+  }
+
+  Future<void> sendMessage() async {
+    final sms = smsController.text.trim();
+    smsController.text = '';
+    print(sms);
+    if (sms != '') {
+      await HomeService.sendMessage(sms);
+    }
   }
 }
