@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flash_chat1/app/modules/home/service/home_service.dart';
 import 'package:flash_chat1/app/routes/app_pages.dart';
 import 'package:flash_chat1/utils/app_shows.dart';
@@ -25,5 +26,9 @@ class HomeController extends GetxController {
     if (sms != '') {
       await HomeService.sendMessage(sms);
     }
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamMessages() {
+    return HomeService.streamMessage();
   }
 }
